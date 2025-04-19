@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm-chat-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: llm-chat-api
+  template:
+    metadata:
+      labels:
+        app: llm-chat-api
+    spec:
+      containers:
+      - name: llm-chat-api
+        image: your-dockerhub/llm-chat-api:latest
+        ports:
+        - containerPort: 5000

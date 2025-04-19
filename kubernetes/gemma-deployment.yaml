@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gemma
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gemma
+  template:
+    metadata:
+      labels:
+        app: gemma
+    spec:
+      containers:
+      - name: gemma
+        image: your-dockerhub/gemma-custom:latest
+        ports:
+        - containerPort: 8080

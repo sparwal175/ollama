@@ -1,0 +1,30 @@
+version: "3.9"
+services:
+  ollama:
+    build:
+      context: ./ollama
+    ports:
+      - "11434:11434"
+
+  gemma:
+    build:
+      context: ./gemma
+    ports:
+      - "8080:8080"
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "5000:5000"
+    depends_on:
+      - ollama
+      - gemma
+
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - backend
