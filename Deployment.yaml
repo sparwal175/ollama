@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: llm-relay
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: llm-relay
+  template:
+    metadata:
+      labels:
+        app: llm-relay
+    spec:
+      containers:
+      - name: llm-relay
+        image: sparwal175/ollama:v0.1
+        imagePullPolicy: Always
+        ports:
+        - containerPort: 11434
+        # If you want this to interact with Ollama on localhost,
+        # make sure Ollama is running in the same pod or as a service
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: llm-relay-service
+spec:
+  selector:
+    app: llm-relay
+  ports:
+    - protocol: TCP
+      port: 80
+      targetPort: 11434
+  type: ClusterIP
