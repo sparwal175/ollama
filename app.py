@@ -1,7 +1,10 @@
 import requests
 import json
+import os
+from dotenv import load_dotenv
+load_dotenv()
 
-url = "http://localhost:11434/api/generate"
+url = os.getenv("OLLAMA_URL")
 headers = {"Content-Type": "application/json"}
 
 # Get user input for first model and prompt
